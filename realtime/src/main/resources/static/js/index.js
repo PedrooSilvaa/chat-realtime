@@ -25,11 +25,14 @@ function openChat() {
 function sendMessage(e) {
     e.preventDefault();
     const messageInput = document.getElementById("messageInput").value;
+    //console.log('oi'+messageInput);
 
     const message = {
         user: sessionStorage.getItem("user"),
         msg: messageInput
     };
+        //console.log(messageInput);
+
 
     Client.send("/app/chatMessage", {}, JSON.stringify(message));
 
@@ -52,8 +55,10 @@ function connect(){
         Client.subscribe('/canal', function (message) {
             const chatMessage = JSON.parse(message.body);
             displayMessage(chatMessage.msg, chatMessage.user);
+            console.log(chatMessage);
+            console.log(typeof(chatMessage))
         });
-    });
+    }); 
 }
 
 
